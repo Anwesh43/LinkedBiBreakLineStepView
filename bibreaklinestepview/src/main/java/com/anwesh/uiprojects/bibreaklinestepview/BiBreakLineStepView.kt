@@ -37,23 +37,23 @@ fun Canvas.drawBBLNode(i : Int, scale : Float, paint : Paint) {
     val size : Float = gap / sizeFactor
     val sc1 : Float = scale.divideScale(0, 2)
     val sc2 : Float = scale.divideScale(1, 2)
-    val yGap : Float = size / lines
+    val yGap : Float = (2 * size) / lines
     val dSize : Float = size / 2
     paint.color = foreColor
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     paint.strokeCap = Paint.Cap.ROUND
     save()
-    translate(w / 2, gap * (i + 1))
+    translate(w / 2, gap * (i + 1) + size)
     for (j in 0..(parts - 1)) {
         val scj : Float = sc2.divideScale(j, parts)
         save()
-        rotate(-90f * j.sf() * scj)
-        drawLine(0f, 0f, 0f, -size, paint)
+        rotate(90f * j.sf() * scj)
+        drawLine(0f, 0f, 0f, -2 * size, paint)
         for (k in 0..(lines - 1)) {
             val sck : Float = sc1.divideScale(k, lines)
             save()
-            translate(0f, -yGap * k * sck)
-            drawLine(0f, 0f, dSize / 2 * j.sf(), 0f, paint)
+            translate(0f, -yGap * (k + 1) * sck)
+            drawLine(0f, 0f, dSize  * j.sf(), 0f, paint)
             restore()
         }
         restore()
@@ -221,7 +221,7 @@ class BiBreakLineStepView(ctx : Context) : View(ctx) {
         fun create(activity: Activity) : BiBreakLineStepView {
             val view : BiBreakLineStepView = BiBreakLineStepView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }

@@ -50,12 +50,15 @@ fun Canvas.drawBBLNode(i : Int, scale : Float, paint : Paint) {
         save()
         rotate(90f * j.sf() * scj)
         drawLine(0f, 0f, 0f, -2 * size, paint)
+        var y : Float = 0f
         for (k in 0..(lines - 1)) {
             val sck : Float = sc1.divideScale(k, lines)
+            y += yGap * sck
             save()
-            translate(0f, -yGap * (k + 1) * sck)
+            translate(0f, -y)
             drawLine(0f, 0f, dSize  * j.sf(), 0f, paint)
             restore()
+
         }
         restore()
     }

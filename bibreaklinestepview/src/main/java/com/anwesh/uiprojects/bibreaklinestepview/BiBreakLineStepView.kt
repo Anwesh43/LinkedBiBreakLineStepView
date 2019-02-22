@@ -216,4 +216,12 @@ class BiBreakLineStepView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+        fun create(activity: Activity) : BiBreakLineStepView {
+            val view : BiBreakLineStepView = BiBreakLineStepView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
